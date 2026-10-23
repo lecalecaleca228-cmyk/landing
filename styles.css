@@ -451,21 +451,6 @@ h2 {
   color: transparent;
 }
 
-.cards-reviews {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.review p {
-  font-size: 1rem;
-  color: var(--text);
-}
-
-.review footer {
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -643,10 +628,6 @@ h2 {
   }
 
   .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .cards-reviews {
     grid-template-columns: 1fr;
   }
 
