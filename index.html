@@ -115,6 +115,8 @@
     .hero-type { font-family:var(--cond); font-weight:900; line-height:.9; text-transform:uppercase; font-size:clamp(4.5rem,14vw,11rem); letter-spacing:-.01em; margin:-10px 0 6px; }
     .hero-type .t-line { display:block; overflow:hidden; }
     .hero-type .t-line > span { display:inline-block; animation:rise 1s var(--ease) both; }
+    .hero-type .t-line > span b { display:inline-block; opacity:0; transform:translateY(110%); animation:charRise .7s var(--ease) forwards; }
+    @keyframes charRise { to { opacity:1; transform:none; } }
     .hero-type .t-line--2 { color:transparent; -webkit-text-stroke:1.5px var(--acid); margin-bottom:30px; }
     @keyframes rise { from { transform:translateY(110%); opacity:0 } to { transform:none; opacity:1 } }
     .hero-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
@@ -338,9 +340,33 @@
     }
     .card-glare:hover::before { opacity:1; }
 
+    /* Блик на карточках портфолио + tilt */
+    .tilt { transform-style:preserve-3d; transition:transform .18s ease; will-change:transform; }
+    .tilt .tilt-e { transform:translateZ(14px); }
+
     /* Вторая бегущая строка перед футером */
     .ticker--volt .ticker__track span { color:#bfbfc4; }
     .ticker--volt .ticker__track b { color:var(--acid); }
+
+    /* Загрузочный экран */
+    .loader {
+      position:fixed; inset:0; z-index:100; background:var(--bg);
+      display:flex; align-items:center; justify-content:center;
+      transition:opacity .6s ease, visibility .6s ease;
+    }
+    .loader.done { opacity:0; visibility:hidden; }
+    .loader__inner { text-align:center; display:grid; justify-items:center; gap:18px; }
+    .loader__brand { font-family:var(--cond); font-weight:900; font-size:clamp(2.4rem,7vw,4rem); text-transform:uppercase; color:var(--text); letter-spacing:.02em; }
+    .loader__brand span { color:var(--acid); }
+    .loader__pct { font-family:var(--cond); font-size:clamp(4rem,12vw,7rem); font-weight:900; color:var(--acid); line-height:1; }
+    .loader__bar { width:240px; height:4px; background:var(--line); position:relative; overflow:hidden; border-radius:4px; }
+    .loader__bar i { position:absolute; inset:0; width:0; background:var(--acid); box-shadow:0 0 16px var(--acid-dim); transition:width .12s linear; }
+    .loader__tag { font-family:var(--mono); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+    body.loading { overflow:hidden; }
+
+    .hero-particles { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+    .hero-particles .pt { position:absolute; bottom:-10px; border-radius:50%; background:var(--acid); opacity:0; animation:ptRise linear infinite; }
+    @keyframes ptRise { 0% { transform:translate(0,0); opacity:0; } 10% { opacity:.6; } 90% { opacity:.35; } 100% { transform:translate(var(--ptdx,0), calc(-1 * var(--vh,100vh))); opacity:0; } }
 
     /* Адаптив */
     @media (max-width: 960px) {
@@ -382,6 +408,15 @@
   <div class="read-progress" id="readProgress" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__brand">Fitfuux<span>.</span></div>
+      <div class="loader__pct"><span id="loaderPct">0</span>%</div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+      <div class="loader__tag">лендинги под ключ</div>
+    </div>
+  </div>
+
   <header class="site-header">
     <div class="container hdr-inner">
       <a class="logo" href="#top">
@@ -403,6 +438,7 @@
 
   <main id="top">
     <section class="hero">
+      <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
       <div class="container">
         <p class="eyebrow"><span class="dot"></span>Лендинги для бизнеса под ключ</p>
         <div class="hero-type">
@@ -568,19 +604,22 @@
           <p class="section-lead" style="color:var(--muted); max-width:560px;">Вы заранее знаете, что получите и сколько это стоит.</p>
         </div>
         <div class="cards">
-          <article class="card reveal data-delay="1"">\n            <span class="card-glare"></span>
+          <article class="card reveal tilt" data-delay="1">
+            <span class="card-glare"></span>
             <span class="c-num">/01</span>
             <h3>Лендинг<br>«Старт»</h3>
             <p>Одностраничный сайт-визитка: структура, современный дизайн, адаптив, форма заявки. Для быстрого присутствия бизнеса в интернете.</p>
             <div class="card-price"><small>стоимость под ключ</small>от 4 000 ₽</div>
           </article>
-          <article class="card reveal data-delay="2" style="background:var(--bg-2);"">\n            <span class="card-glare"></span>
+          <article class="card reveal tilt" data-delay="2" style="background:var(--bg-2);">
+            <span class="card-glare"></span>
             <span class="c-num">/02</span>
             <h3>Продающий<br>лендинг</h3>
             <p>Полный цикл: структура под вашу аудиторию, продающие тексты, анимации, подключение приёма заявок.</p>
             <div class="card-price"><small>стоимость под ключ</small>от 8 000 ₽</div>
           </article>
-          <article class="card reveal data-delay="3"">\n            <span class="card-glare"></span>
+          <article class="card reveal tilt" data-delay="3">
+            <span class="card-glare"></span>
             <span class="c-num">/03</span>
             <h3>Доработка<br>сайта</h3>
             <p>Улучшение существующего сайта: адаптив под мобильные, ускорение загрузки, редизайн отдельных блоков.</p>
@@ -598,48 +637,48 @@
           <p class="section-lead" style="color:var(--muted); max-width:600px;">Откройте любой — и вы увидите, как может выглядеть сайт вашей компании: структура, тексты, дизайн и адаптив собраны с нуля.</p>
         </div>
         <div class="pf-grid">
-          <a class="pf-card reveal" href="florist.html" target="_blank" rel="noopener">
-            <span class="pf-thumb pf-thumb-florist"><span class="pf-mono">Б</span><span class="pf-tag">Цветы</span></span>
+          <a class="pf-card reveal tilt" href="florist.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-florist"><span class="card-glare pf-glare"></span><span class="pf-mono">Б</span><span class="pf-tag">Цветы</span></span>
             <span class="pf-body">
               <h3>Магазин цветов «Букет»</h3>
               <p>Витрина букетов, доставка за час, оформление праздников.</p>
               <span class="pf-link">Открыть демо <span class="arr">→</span></span>
             </span>
           </a>
-          <a class="pf-card reveal" href="barbershop.html" target="_blank" rel="noopener" data-delay="1">
-            <span class="pf-thumb pf-thumb-barber"><span class="pf-mono">Б</span><span class="pf-tag">Барбершоп</span></span>
+          <a class="pf-card reveal tilt" href="barbershop.html" target="_blank" rel="noopener" data-delay="1">
+            <span class="pf-thumb pf-thumb-barber"><span class="card-glare pf-glare"></span><span class="pf-mono">Б</span><span class="pf-tag">Барбершоп</span></span>
             <span class="pf-body">
               <h3>Барбершоп «Бритва»</h3>
               <p>Тёмный дизайн, услуги и цены, запись к барберу онлайн.</p>
               <span class="pf-link">Открыть демо <span class="arr">→</span></span>
             </span>
           </a>
-          <a class="pf-card reveal" href="fitness.html" target="_blank" rel="noopener" data-delay="2">
-            <span class="pf-thumb pf-thumb-fitness"><span class="pf-mono">А</span><span class="pf-tag">Фитнес</span></span>
+          <a class="pf-card reveal tilt" href="fitness.html" target="_blank" rel="noopener" data-delay="2">
+            <span class="pf-thumb pf-thumb-fitness"><span class="card-glare pf-glare"></span><span class="pf-mono">А</span><span class="pf-tag">Фитнес</span></span>
             <span class="pf-body">
               <h3>Фитнес-клуб «Атлант»</h3>
               <p>Абонементы, направления тренировок, пробное занятие.</p>
               <span class="pf-link">Открыть демо <span class="arr">→</span></span>
             </span>
           </a>
-          <a class="pf-card reveal" href="coffee.html" target="_blank" rel="noopener">
-            <span class="pf-thumb pf-thumb-coffee"><span class="pf-mono">З</span><span class="pf-tag">Кофейня</span></span>
+          <a class="pf-card reveal tilt" href="coffee.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-coffee"><span class="card-glare pf-glare"></span><span class="pf-mono">З</span><span class="pf-tag">Кофейня</span></span>
             <span class="pf-body">
               <h3>Кофейня «Зерно»</h3>
               <p>Меню и цены, атмосфера заведения, путь до точки на карте.</p>
               <span class="pf-link">Открыть демо <span class="arr">→</span></span>
             </span>
           </a>
-          <a class="pf-card reveal" href="autoservice.html" target="_blank" rel="noopener" data-delay="1">
-            <span class="pf-thumb pf-thumb-auto"><span class="pf-mono">М</span><span class="pf-tag">Автосервис</span></span>
+          <a class="pf-card reveal tilt" href="autoservice.html" target="_blank" rel="noopener" data-delay="1">
+            <span class="pf-thumb pf-thumb-auto"><span class="card-glare pf-glare"></span><span class="pf-mono">М</span><span class="pf-tag">Автосервис</span></span>
             <span class="pf-body">
               <h3>Автосервис «Мотор»</h3>
               <p>Услуги с гарантией, честный прайс, запись на диагностику.</p>
               <span class="pf-link">Открыть демо <span class="arr">→</span></span>
             </span>
           </a>
-          <a class="pf-card reveal" href="dentist.html" target="_blank" rel="noopener" data-delay="2">
-            <span class="pf-thumb pf-thumb-dent"><span class="pf-mono">Д</span><span class="pf-tag">Стоматология</span></span>
+          <a class="pf-card reveal tilt" href="dentist.html" target="_blank" rel="noopener" data-delay="2">
+            <span class="pf-thumb pf-thumb-dent"><span class="card-glare pf-glare"></span><span class="pf-mono">Д</span><span class="pf-tag">Стоматология</span></span>
             <span class="pf-body">
               <h3>Стоматология «Дента»</h3>
               <p>Услуги клиники, прозрачные цены, запись на приём.</p>
@@ -875,7 +914,21 @@
     var dot = document.getElementById("cursorDot"); if (dot) dot.style.display = "none";
   }
 
-  /* 3. Раздельное появление заголовков */
+  /* 3. 3D-наклон карточек */
+  if (canHover && !reduce) {
+    var tiltCards = document.querySelectorAll(".tilt");
+    tiltCards.forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "perspective(800px) rotateX(" + (-py * 8).toFixed(2) + "deg) rotateY(" + (px * 10).toFixed(2) + "deg) translateY(-3px)";
+      });
+      card.addEventListener("pointerleave", function () { card.style.transform = ""; });
+    });
+  }
+
+  /* 4. Раздельное появление заголовков */
   document.querySelectorAll(".h-xl").forEach(function (h) {
     if (h.dataset.split) return; h.dataset.split = "1";
     var raw = h.innerHTML;
@@ -916,6 +969,89 @@
       function step(ts) { if (!t0) t0 = ts; var p = Math.min((ts - t0) / dur, 1); var k = 1 - Math.pow(1 - p, 3); scrollTo(0, start + (to - start) * k); if (p < 1) ani = requestAnimationFrame(step); }
       ani = requestAnimationFrame(step);
     }
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var ld = document.getElementById("loader");
+  var pctEl = document.getElementById("loaderPct");
+  var barEl = document.getElementById("loaderBar");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.body.classList.add("loading");
+  if (!ld) { document.body.classList.remove("loading"); return; }
+  var p = 0, target = 0;
+  function render() {
+    if (pctEl) pctEl.textContent = Math.round(p);
+    if (barEl) barEl.style.width = p + "%";
+  }
+  function loadProgress() {
+    // приблизительно: 40% сразу после парсинга, дальше по мере готовности
+    var base = 40;
+    if (document.readyState === "interactive") base = 55;
+    if (document.readyState === "complete") base = 90;
+    target = base;
+  }
+  document.addEventListener("readystatechange", loadProgress);
+  window.addEventListener("load", function () { target = 100; });
+  loadProgress();
+  var rAF = requestAnimationFrame;
+  if (reduce) { target = 100; }
+  function tick() {
+    if (p < target) { p = Math.min(target, p + Math.max(1, (target - p) * 0.25)); render(); }
+    if (p >= 100 && pctEl && pctEl.textContent === "100") {
+      setTimeout(function () { ld.classList.add("done"); document.body.classList.remove("loading"); }, 350);
+      return;
+    }
+    rAF(tick);
+  }
+  // гарантия: если load долго не приходит
+  setTimeout(function () { if (p < 100) { target = 100; } }, 3000);
+  tick();
+})();
+</script>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function splitHero() {
+    var type = document.querySelector(".hero-type");
+    if (!type || type.dataset.letters) return; type.dataset.letters = "1";
+    type.querySelectorAll(".t-line > span").forEach(function (wordSpan) {
+      var text = wordSpan.textContent;
+      if (reduce) return;
+      var html = "";
+      var base = parseFloat(wordSpan.style.animationDelay) || 0;
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        if (ch === " ") { html += " "; continue; }
+        html += '<b style="animation-delay:' + (0.4 + base + i * 0.05).toFixed(2) + 's">' + ch + "</b>";
+      }
+      wordSpan.innerHTML = html;
+    });
+  }
+  splitHero();
+})();
+</script>
+
+<script>
+(function () {
+  var hero = document.getElementById("heroParticles");
+  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var n = 24;
+  for (var i = 0; i < n; i++) {
+    var p = document.createElement("span");
+    p.className = "pt";
+    var size = (Math.random() * 3 + 1).toFixed(1);
+    var vh = (window.innerHeight || 800);
+    p.style.width = size + "px"; p.style.height = size + "px";
+    p.style.left = (Math.random() * 100).toFixed(1) + "%";
+    p.style.setProperty("--vh", vh + "px");
+    p.style.setProperty("--ptdx", ((Math.random() * 120) - 60).toFixed(0) + "px");
+    p.style.animationDuration = (Math.random() * 6 + 5).toFixed(1) + "s";
+    p.style.animationDelay = (Math.random() * 9).toFixed(1) + "s";
+    hero.appendChild(p);
   }
 })();
 </script>
