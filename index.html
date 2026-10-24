@@ -2,629 +2,136 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Алексей — создание лендингов для бизнеса под ключ</title>
   <meta name="description" content="Создам продающий лендинг для вашего бизнеса под ключ от 4 000 ₽: современный дизайн, адаптив под телефоны, форма заявки. Срок от 3 дней.">
-  <meta name="theme-color" content="#0a0a0b">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@400;500;700&family=Onest:wght@400;500;600&display=swap">
-  <style>
-    :root {
-      --bg: #0a0a0b;
-      --bg-2: #101012;
-      --line: rgba(255,255,255,.1);
-      --line-soft: rgba(255,255,255,.06);
-      --text: #f2f2f3;
-      --muted: #8a8a93;
-      --acid: #d4ff3f;
-      --acid-dim: rgba(212,255,63,.55);
-      --cond: "Fira Sans Extra Condensed", "Arial Narrow", sans-serif;
-      --mono: "JetBrains Mono", ui-monospace, monospace;
-      --body: "Onest", system-ui, -apple-system, sans-serif;
-      --container: 1160px;
-      --ease: cubic-bezier(.22,1,.36,1);
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; overflow-x:hidden; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--body);
-      font-size: 17px;
-      line-height: 1.6;
-      overflow-x:hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    /* Зерно поверх всего */
-    .grain {
-      position: fixed; inset:0; z-index:60; pointer-events:none; opacity:.06; mix-blend-mode:overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
-    .container { max-width:var(--container); margin:0 auto; padding:0 28px; }
-    ::selection { background:var(--acid); color:#0a0a0b; }
-
-    h1,h2,h3 { font-family:var(--cond); font-weight:800; line-height:1.02; text-transform:uppercase; letter-spacing:.01em; }
-    .eyebrow {
-      font-family:var(--mono); font-size:.74rem; letter-spacing:.16em; text-transform:uppercase;
-      color:var(--muted); display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
-    }
-    .eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--acid); box-shadow:0 0 12px var(--acid); animation:pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-
-    .h-xl { font-size:clamp(2.4rem,6vw,4.2rem); margin-bottom:20px; }
-    .section { padding:110px 0; position:relative; }
-    .section__head { margin-bottom:56px; }
-    .section__head--row { display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap; }
-
-    /* Кнопки */
-    .btn {
-      display:inline-flex; align-items:center; gap:12px; padding:16px 26px;
-      font-family:var(--body); font-weight:600; font-size:.95rem; text-decoration:none;
-      border:1px solid transparent; cursor:pointer; transition:transform .2s var(--ease), background .2s ease, color .2s ease, border-color .2s ease;
-      position:relative; overflow:hidden;
-    }
-    .btn .ico { width:16px; height:16px; flex-shrink:0; transition:transform .25s var(--ease); }
-    .btn:hover .ico { transform:translateX(4px); }
-    .btn--volt { background:var(--acid); color:#0a0a0b; }
-    .btn--volt:hover { transform:translateY(-2px); box-shadow:0 16px 40px var(--acid-dim); }
-    .btn--ghost { border-color:var(--line); color:var(--text); background:transparent; }
-    .btn--ghost:hover { border-color:var(--acid); color:var(--acid); transform:translateY(-2px); }
-    .btn--sm { padding:12px 20px; font-size:.88rem; }
-    .btn::before {
-      content:""; position:absolute; top:0; left:-100%; width:60%; height:100%;
-      background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
-      transform:skewX(-20deg); animation:sheen 4.5s infinite;
-    }
-    @keyframes sheen { 0%,60%{left:-100%} 100%{left:200%} }
-
-    /* Хедер */
-    .site-header { position:sticky; top:0; z-index:50; background:rgba(10,10,11,.82); backdrop-filter:blur(16px); border-bottom:1px solid var(--line-soft); }
-    .hdr-inner { display:flex; align-items:center; justify-content:space-between; min-height:74px; gap:24px; }
-    .logo { display:inline-flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); line-height:1; }
-    .logo .fit {
-      font-family:var(--cond); font-weight:900; text-transform:uppercase;
-      font-size:2rem; letter-spacing:.02em; color:var(--text); transition:letter-spacing .3s var(--ease);
-    }
-    .logo .fit .x { color:var(--acid); }
-    .logo:hover .fit { letter-spacing:.06em; }
-    .logo .tag { font-family:var(--mono); font-size:.62rem; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; border-left:2px solid var(--acid); padding-left:10px; line-height:1.35; }
-    .site-nav { display:flex; align-items:center; gap:32px; }
-    .site-nav > a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:500; position:relative; padding:6px 0; transition:color .2s ease; }
-    .site-nav > a:hover { color:var(--text); }
-    .site-nav > a::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--acid); transition:width .3s var(--ease); }
-    .site-nav > a:hover::after { width:100%; }
-    .site-nav > a.btn::after { display:none; }
-    .burger {
-      display:none; flex-direction:column; gap:6px; background:none; border:1px solid var(--line);
-      padding:13px 12px; cursor:pointer; border-radius:4px;
-    }
-    .burger i { width:22px; height:2px; background:var(--text); transition:transform .25s var(--ease), opacity .2s ease; }
-    .burger.is-open i:nth-child(1){ transform:translateY(8px) rotate(45deg); }
-    .burger.is-open i:nth-child(2){ transform:translateY(0) rotate(-45deg); }
-
-    /* Hero */
-    .hero { position:relative; padding:120px 0 90px; overflow:hidden; }
-    .hero::before {
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(700px 520px at 80% 0%, rgba(212,255,63,.07), transparent 60%),
-        radial-gradient(600px 500px at 8% 90%, rgba(255,255,255,.035), transparent 60%);
-    }
-    .hero-type { font-family:var(--cond); font-weight:900; line-height:.9; text-transform:uppercase; font-size:clamp(4.5rem,14vw,11rem); letter-spacing:-.01em; margin:-10px 0 6px; }
-    .hero-type .t-line { display:block; overflow:hidden; }
-    .hero-type .t-line > span { display:inline-block; animation:rise 1s var(--ease) both; }
-    .hero-type .t-line > span b { display:inline-block; opacity:0; transform:translateY(110%); animation:charRise .7s var(--ease) forwards; }
-    .hero-type .t-line > span b.w { white-space:nowrap; }
-    @keyframes charRise { to { opacity:1; transform:none; } }
-    .hero-type .t-line--2 { color:transparent; -webkit-text-stroke:1.5px var(--acid); margin-bottom:30px; }
-    @keyframes rise { from { transform:translateY(110%); opacity:0 } to { transform:none; opacity:1 } }
-    .hero-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
-    .hero-grid { display:grid; grid-template-columns:1.3fr .7fr; gap:60px; align-items:center; margin-top:28px; }
-    .hero-lead { color:var(--muted); font-size:clamp(1rem,1.7vw,1.18rem); max-width:560px; margin-bottom:36px; }
-    .hero-sides { display:flex; flex-wrap:wrap; gap:28px; }
-    .hero-stats { display:grid; grid-template-columns:1fr; gap:26px; border-left:1px solid var(--line); padding-left:34px; }
-    .hero-stat dt { font-family:var(--cond); font-size:clamp(2.2rem,4vw,3rem); font-weight:800; color:var(--acid); line-height:1; }
-    .hero-stat dd { font-family:var(--mono); font-size:.78rem; color:var(--muted); letter-spacing:.05em; margin-top:8px; }
-    .hero-visual { position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px; }
-    .hero-panel {
-      width:260px; aspect-ratio:3/4; border:1px solid var(--line); background:linear-gradient(160deg,#141416,#0c0c0d);
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
-      position:relative; overflow:hidden;
-    }
-    .hero-panel::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 20%, rgba(212,255,63,.12), transparent 60%); }
-    .hero-panel .big { font-family:var(--cond); font-size:6.5rem; font-weight:900; color:transparent; -webkit-text-stroke:2px var(--acid); line-height:1; animation:sway 6s ease-in-out infinite; }
-    @keyframes sway { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
-    .hero-panel .bar { width:140px; height:4px; background:var(--line); position:relative; overflow:hidden; }
-    .hero-panel .bar::after { content:""; position:absolute; inset:0; width:50%; background:var(--acid); animation:bar 2.6s ease-in-out infinite; transform-origin:left; }
-    @keyframes bar { 0%,100%{transform:scaleX(.2); transform-origin:left} 50%{transform:scaleX(1); transform-origin:right} }
-    .hero-panel .lbl { font-family:var(--mono); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
-    .hc-corner { position:absolute; width:14px; height:14px; border:2px solid var(--acid); opacity:.7; }
-    .hc-tl { top:-4px; left:-4px; border-right:none; border-bottom:none; }
-    .hc-br { bottom:-4px; right:-4px; border-left:none; border-top:none; }
-    .corner-tag {
-      padding:8px 14px; background:#111113; border:1px solid var(--line);
-      font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; color:var(--text);
-      display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
-    }
-    .corner-tag::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--acid); flex-shrink:0; }
-    .corner-tag.c2 { color:var(--acid); }
-    .corner-tag.c2::before { background:var(--text); }
-    .corner-tags { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:18px; }
-    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-    .corner-tag { animation:floaty 5s ease-in-out infinite; }
-    .corner-tag:nth-child(2) { animation-delay:.6s; color:var(--acid); }
-    .corner-tag:nth-child(3) { animation-delay:1.2s; }
-
-    /* Тикер */
-    .ticker { border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-2); overflow:hidden; }
-    .ticker__track { display:flex; width:max-content; white-space:nowrap; animation:tick 28s linear infinite; padding:18px 0; }
-    .ticker:hover .ticker__track { animation-play-state:paused; }
-    .ticker__track span {
-      font-family:var(--cond); font-style:italic; font-weight:800; text-transform:uppercase;
-      font-size:1.6rem; color:var(--muted); margin:0 40px; letter-spacing:.02em;
-    }
-    .ticker__track b { color:var(--acid); font-weight:900; }
-    @keyframes tick { to { transform:translateX(-50%); } }
-
-    /* About — нумерованный список */
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
-    .about-num { font-family:var(--mono); font-size:.8rem; color:var(--acid); letter-spacing:.1em; margin-bottom:18px; }
-    .about-text > p { color:var(--muted); margin-bottom:16px; max-width:520px; }
-    .about-list { list-style:none; border-top:1px solid var(--line); margin-top:34px; }
-    .about-list li { display:grid; grid-template-columns:52px 1fr; gap:22px; padding:22px 0; border-bottom:1px solid var(--line); align-items:center; }
-    .about-list .n { font-family:var(--mono); font-size:.8rem; color:var(--muted); }
-    .about-list .t { font-family:var(--cond); font-size:1.3rem; font-weight:600; text-transform:uppercase; letter-spacing:.02em; }
-    .about-list li:hover .t { color:var(--acid); }
-    .about-list li { transition:padding-left .3s var(--ease), background .3s ease; }
-    .about-list li:hover { padding-left:12px; background:linear-gradient(90deg,rgba(212,255,63,.04),transparent); }
-    .about-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:34px; }
-    .astat { border:1px solid var(--line); padding:18px 20px; text-align:left; background:var(--bg-2); }
-    .astat b { font-family:var(--cond); font-size:2.2rem; font-weight:800; color:var(--acid); display:block; line-height:1; }
-    .astat span { font-family:var(--mono); font-size:.7rem; color:var(--muted); letter-spacing:.05em; display:block; margin-top:8px; }
-    .about-photo {
-      position:relative; aspect-ratio:4/5; border:1px solid var(--line); background:#0e0e10;
-      display:flex; align-items:center; justify-content:center; overflow:hidden;
-    }
-    .about-photo::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 2px, transparent 2px 12px); }
-    .about-photo .mono { font-family:var(--cond); font-size:13rem; font-weight:900; color:transparent; -webkit-text-stroke:2px rgba(255,255,255,.18); line-height:1; position:relative; }
-    .about-photo .mono-over { position:absolute; font-family:var(--cond); font-size:13rem; font-weight:900; color:var(--acid); line-height:1; opacity:0; transform:translateY(20px); transition:opacity .4s ease, transform .4s var(--ease); mix-blend-mode:screen; }
-    .about-photo:hover .mono-over { opacity:.9; transform:none; }
-    .about-photo .cap { position:absolute; bottom:0; left:0; right:0; padding:18px; display:flex; justify-content:space-between; font-family:var(--mono); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-    .about-photo .cap b { color:var(--acid); }
-
-    /* Cards — цены */
-    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line); }
-    .card { padding:40px 36px; border-right:1px solid var(--line); background:var(--bg); display:flex; flex-direction:column; gap:18px; position:relative; transition:background .3s ease; }
-    .card:last-child { border-right:none; }
-    .card:hover { background:var(--bg-2); }
-    .card .c-num { font-family:var(--mono); font-size:.74rem; color:var(--acid); letter-spacing:.12em; }
-    .card h3 { font-size:clamp(1.5rem,2.6vw,2rem); }
-    .card p { color:var(--muted); font-size:.95rem; flex:1; }
-    .card-price { font-family:var(--cond); font-size:2.4rem; font-weight:800; color:var(--text); margin-top:auto; padding-top:12px; }
-    .card-price small { font-family:var(--mono); font-size:.7rem; color:var(--muted); font-weight:400; display:block; margin-bottom:2px; }
-    .card::after { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--acid); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
-    .card:hover::after { transform:scaleX(1); }
-
-    /* Портфолио */
-    .pf-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line); }
-    .pf-card { display:flex; flex-direction:column; text-decoration:none; color:var(--text); border-right:1px solid var(--line); border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
-    .pf-card:nth-child(3n){ border-right:none; }
-    .pf-card:nth-child(n+4){ border-bottom:none; }
-    .pf-card .pf-thumb {
-      aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
-    }
-    .pf-card .pf-thumb::before { content:""; position:absolute; inset:0; transition:transform .5s var(--ease); }
-    .pf-card:hover .pf-thumb::before { transform:scale(1.08); }
-    .pf-card .pf-mono { font-family:var(--cond); font-size:4.5rem; font-weight:900; color:rgba(255,255,255,.95); position:relative; z-index:1; transition:transform .45s var(--ease); }
-    .pf-card:hover .pf-mono { transform:rotate(-6deg) scale(1.1); }
-    .pf-card .pf-tag {
-      position:absolute; top:14px; left:14px; z-index:2; background:rgba(10,10,11,.75); border:1px solid var(--line);
-      padding:6px 12px; font-family:var(--mono); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text);
-      backdrop-filter:blur(4px);
-    }
-    .pf-body { padding:26px 28px 30px; display:grid; gap:10px; }
-    .pf-body h3 { font-size:1.4rem; }
-    .pf-body p { color:var(--muted); font-size:.9rem; }
-    .pf-link { font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--acid); display:inline-flex; align-items:center; gap:8px; margin-top:6px; }
-    .pf-link .arr { display:inline-block; transition:transform .3s var(--ease); }
-    .pf-card:hover .pf-link .arr { transform:translateX(6px); }
-    .pf-thumb-florist::before { background:linear-gradient(135deg,#a34d7f,#4f9c6d); }
-    .pf-thumb-barber::before { background:linear-gradient(135deg,#4a3a16,#c0842f); }
-    .pf-thumb-fitness::before { background:linear-gradient(135deg,#c33a22,#d98f2b); }
-    .pf-thumb-coffee::before { background:linear-gradient(135deg,#60421c,#a5743f); }
-    .pf-thumb-auto::before { background:linear-gradient(135deg,#1f3d63,#3a65b8); }
-    .pf-thumb-dent::before { background:linear-gradient(135deg,#0e676b,#1ba5ad); }
-
-    /* Контакты */
-    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
-    .contact-info > p { color:var(--muted); max-width:430px; margin-bottom:38px; }
-    .contact-list { list-style:none; display:grid; gap:0; border-top:1px solid var(--line); }
-    .contact-item { display:flex; align-items:center; gap:18px; padding:20px 0; border-bottom:1px solid var(--line); }
-    .contact-item .k { font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); width:110px; flex-shrink:0; }
-    .contact-item a { color:var(--text); text-decoration:none; font-size:1.05rem; font-weight:600; transition:color .2s ease; }
-    .contact-item a:hover { color:var(--acid); }
-    .contact-ico { width:40px; height:40px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
-
-    .pay-block { margin-top:40px; border:1px solid var(--line); background:var(--bg-2); padding:30px; position:relative; overflow:hidden; }
-    .pay-block::before { content:""; position:absolute; top:-60%; right:-20%; width:300px; height:300px; background:radial-gradient(circle,rgba(212,255,63,.1),transparent 65%); }
-    .pay-block h3 { font-size:1.6rem; margin-bottom:12px; position:relative; }
-    .pay-block > p { color:var(--muted); font-size:.92rem; margin-bottom:22px; position:relative; }
-    .pay-row { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:18px 20px; border:1px dashed rgba(212,255,63,.35); background:rgba(212,255,63,.035); position:relative; }
-    .pay-number { font-family:var(--cond); font-size:1.7rem; font-weight:700; }
-    .pay-bank { display:block; font-family:var(--mono); font-size:.7rem; color:var(--muted); margin-top:4px; letter-spacing:.05em; }
-    .pay-note { color:var(--muted); font-size:.82rem; margin-top:16px; position:relative; }
-    .pay-status { min-height:1.2em; font-family:var(--mono); font-size:.8rem; color:var(--acid); margin-top:12px; position:relative; }
-
-    .contact-form { display:grid; gap:20px; border:1px solid var(--line); background:var(--bg); padding:36px; }
-    .contact-form label { display:grid; gap:10px; font-size:.9rem; }
-    .contact-form label > span { font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
-    .contact-form input, .contact-form textarea {
-      background:var(--bg-2); border:1px solid var(--line); border-radius:0; padding:15px 18px;
-      color:var(--text); font:inherit; transition:border-color .2s ease, box-shadow .2s ease;
-    }
-    .contact-form input:focus, .contact-form textarea:focus { outline:none; border-color:var(--acid); box-shadow:0 0 0 1px var(--acid); }
-    .contact-form textarea { resize:vertical; min-height:110px; }
-    .gotcha-hp { position:absolute; width:1px; height:1px; left:-9999px; opacity:0; }
-    .form-status { min-height:1.4em; font-size:.9rem; }
-    .form-status.is-success { color:var(--acid); }
-    .form-status.is-error { color:#ff6b6b; }
-    .contact-form .btn { justify-content:center; }
-
-    /* Футер */
-    .site-footer { border-top:1px solid var(--line); }
-    .ftr-cta { padding:80px 0 60px; border-bottom:1px solid var(--line); text-align:center; }
-    .ftr-cta .eyebrow { justify-content:center; }
-    .ftr-cta .big {
-      display:inline-block; font-family:var(--cond); font-weight:900; text-transform:uppercase;
-      font-size:clamp(2.6rem,8vw,6.5rem); color:var(--text); text-decoration:none; line-height:1;
-      transition:color .3s ease; position:relative;
-    }
-    .ftr-cta .big span { display:block; }
-    .ftr-cta .big:hover { color:var(--acid); }
-    .ftr-cta .big-sub { font-family:var(--mono); font-size:.8rem; letter-spacing:.1em; color:var(--muted); margin-top:14px; display:inline-flex; align-items:center; gap:8px; }
-    .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; color:var(--muted); font-size:.86rem; font-family:var(--mono); padding:34px 0; }
-    .footer-nav { display:flex; gap:28px; }
-    .footer-nav a { color:var(--muted); text-decoration:none; transition:color .2s ease; }
-    .footer-nav a:hover { color:var(--acid); }
-
-    /* Reveal-анимации */
-    .reveal { opacity:0; transform:translateY(44px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-    .reveal.in { opacity:1; transform:none; }
-    [data-delay="1"] { transition-delay:.1s; }
-    [data-delay="2"] { transition-delay:.2s; }
-    [data-delay="3"] { transition-delay:.3s; }
-    [data-delay="4"] { transition-delay:.4s; }
-    .clipped { clip-path:inset(0 0 100% 0); transition:clip-path 1s var(--ease); }
-    .clipped.in { clip-path:inset(0 0 0 0); }
-
-    /* ===== WOW-эффекты ===== */
-    /* Линия прогресса чтения */
-    .read-progress { position:fixed; top:0; left:0; height:3px; width:0; background:var(--gradient,#d4ff3f); z-index:70; box-shadow:0 0 14px var(--acid-dim); }
-    body:has(.read-progress) .read-progress { background:var(--acid); }
-
-    /* Курсор-акцент (десктоп) */
-    .cursor-dot {
-      position:fixed; left:0; top:0; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%;
-      background:var(--acid); pointer-events:none; z-index:80; mix-blend-mode:screen;
-      box-shadow:0 0 16px var(--acid-dim); transform:translate(-100px,-100px);
-      opacity:0; transition:opacity .3s ease, width .2s ease, height .2s ease, margin .2s ease;
-      will-change:transform;
-    }
-    .cursor-dot.on { opacity:.85; }
-    .cursor-dot.grow { width:34px; height:34px; margin:-17px 0 0 -17px; opacity:.5; }
-
-    /* Магнитные кнопки */
-    .btn-magnet { will-change:transform; transition:transform .25s var(--ease); }
-    .btn-magnet:hover { transform:translate(var(--mx,0),var(--my,0)); }
-
-    /* Параллакс-свечение на всём body */
-    .glow-field { position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background:
-        radial-gradient(620px 420px at var(--gx,20%) var(--gy,10%), rgba(212,255,63,.06), transparent 60%),
-        radial-gradient(500px 400px at var(--gx2,80%) var(--gy2,70%), rgba(47,125,246,.05), transparent 60%);
-      transition:background-position .3s ease;
-    }
-
-    /* Раздельный заголовок */
-    .split-h .split-line { display:block; overflow:hidden; }
-    .split-h .split-line > span { display:inline-block; transform:translateY(110%); opacity:0; transition:transform .8s var(--ease), opacity .6s ease; }
-    .split-h.in .split-line > span { transform:none; opacity:1; }
-
-    /* Блик, бегущий за курсором на карточках */
-    .card-glare { position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:inherit; }
-    .card-glare::before {
-      content:""; position:absolute; width:140px; height:140px; border-radius:50%;
-      background:radial-gradient(circle, rgba(212,255,63,.12), transparent 70%);
-      transform:translate(var(--gxp,40%),var(--gyp,40%)); opacity:0; transition:opacity .3s ease;
-    }
-    .card-glare:hover::before { opacity:1; }
-
-    /* Блик на карточках портфолио + tilt */
-    .tilt { transform-style:preserve-3d; transition:transform .18s ease; will-change:transform; }
-    .tilt .tilt-e { transform:translateZ(14px); }
-
-    /* Вторая бегущая строка перед футером */
-    .ticker--volt .ticker__track span { color:#bfbfc4; }
-    .ticker--volt .ticker__track b { color:var(--acid); }
-
-    /* Загрузочный экран */
-    .loader {
-      position:fixed; inset:0; z-index:100; background:var(--bg);
-      display:flex; align-items:center; justify-content:center;
-      transition:opacity .6s ease, visibility .6s ease;
-    }
-    .loader.done { opacity:0; visibility:hidden; }
-    .loader__inner { text-align:center; display:grid; justify-items:center; gap:18px; }
-    .loader__brand { font-family:var(--cond); font-weight:900; font-size:clamp(2.4rem,7vw,4rem); text-transform:uppercase; color:var(--text); letter-spacing:.02em; }
-    .loader__brand span { color:var(--acid); }
-    .loader__pct { font-family:var(--cond); font-size:clamp(4rem,12vw,7rem); font-weight:900; color:var(--acid); line-height:1; }
-    .loader__bar { width:240px; height:4px; background:var(--line); position:relative; overflow:hidden; border-radius:4px; }
-    .loader__bar i { position:absolute; inset:0; width:0; background:var(--acid); box-shadow:0 0 16px var(--acid-dim); transition:width .12s linear; }
-    .loader__tag { font-family:var(--mono); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
-    body.loading { overflow:hidden; }
-
-    .hero-particles { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
-    .hero-particles .pt { position:absolute; bottom:-10px; border-radius:50%; background:var(--acid); opacity:0; animation:ptRise linear infinite; }
-    @keyframes ptRise { 0% { transform:translate(0,0); opacity:0; } 10% { opacity:.6; } 90% { opacity:.35; } 100% { transform:translate(var(--ptdx,0), calc(-1 * var(--vh,100vh))); opacity:0; } }
-
-    /* Адаптив */
-    @media (max-width: 960px) {
-      .burger { display:flex; }
-      .site-nav {
-        position:absolute; top:74px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0;
-        background:var(--bg-2); border-bottom:1px solid var(--line); padding:16px 28px 24px;
-        transform:translateY(-10px); opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s var(--ease);
-      }
-      .site-nav.is-open { opacity:1; pointer-events:auto; transform:none; }
-      .site-nav > a { padding:14px 0; border-bottom:1px solid var(--line-soft); font-size:1.02rem; }
-      .site-nav > a.btn { margin-top:18px; text-align:center; border-bottom:none; justify-content:center; }
-      .hero-grid { grid-template-columns:1fr; gap:50px; }
-      .hero-visual { order:-1; }
-      .hero-stats { grid-template-columns:repeat(3,1fr); gap:20px; border-left:none; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; }
-      .about-grid, .contact-grid { grid-template-columns:1fr; gap:50px; }
-      .cards, .pf-grid { grid-template-columns:1fr; }
-      .card { border-right:none; border-bottom:1px solid var(--line); }
-      .card:last-child { border-bottom:none; }
-      .pf-card { border-right:none; }
-      .pf-card:nth-child(n){ border-bottom:1px solid var(--line); }
-      .pf-card:last-child { border-bottom:none; }
-      .section { padding:80px 0; }
-      .hero { padding:70px 0 70px; }
-      .corner-tag { position:static; }
-      .hero-visual { flex-direction:column; gap:14px; }
-      .hero-panel { width:200px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior:auto; }
-      *, *::before, *::after { animation:none !important; transition-duration:.01ms !important; }
-      .reveal, .clipped { opacity:1; transform:none; clip-path:inset(0 0 0 0); }
-    }
-  </style>
+  <meta name="theme-color" content="#05080f">
+  <link rel="canonical" href="https://lecalecaleca228-cmyk.github.io/landing/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Алексей — лендинги для бизнеса">
+  <meta property="og:title" content="Алексей — создание лендингов для бизнеса под ключ">
+  <meta property="og:description" content="Современный одностраничный сайт для бизнеса: дизайн, адаптив под телефоны, форма заявки и размещение в интернете. От 4 000 ₽, срок от 3 дней.">
+  <meta property="og:url" content="https://lecalecaleca228-cmyk.github.io/landing/">
+  <meta property="og:image" content="https://lecalecaleca228-cmyk.github.io/landing/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Алексей — создание лендингов для бизнеса под ключ">
+  <meta name="twitter:description" content="Современный одностраничный сайт для бизнеса: дизайн, адаптив под телефоны, форма заявки и размещение в интернете. От 4 000 ₽, срок от 3 дней.">
+  <meta name="twitter:image" content="https://lecalecaleca228-cmyk.github.io/landing/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f7df6'/%3E%3Ctext x='32' y='42' font-size='28' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'%3EА%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="glow-field" aria-hidden="true"></div>
-  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
-  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113761033', 'ym');
 
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__inner">
-      <div class="loader__brand">Fitfuux<span>.</span></div>
-      <div class="loader__pct"><span id="loaderPct">0</span>%</div>
-      <div class="loader__bar"><i id="loaderBar"></i></div>
-      <div class="loader__tag">лендинги под ключ</div>
-    </div>
-  </div>
-
+    ym(113761033, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", trackLinks:true, accurateTrackBounce:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113761033" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- /Yandex.Metrika counter -->
   <header class="site-header">
-    <div class="container hdr-inner">
-      <a class="logo" href="#top">
-        <span class="fit">Fitf<span class="x">uux</span>.</span>
-        <span class="tag">Лендинги<br>под ключ</span>
-      </a>
+    <div class="container header-inner">
+      <a class="logo" href="#top">Алексей<span class="logo-dot">.</span></a>
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false">
-        <i></i><i></i>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <nav class="site-nav">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги и цены</a>
         <a href="#portfolio">Портфолио</a>
         <a href="#contact">Контакты</a>
-        <a class="btn btn--volt btn-magnet btn--sm" href="#contact">Заказать лендинг</a>
+        <a class="btn btn-primary btn-small" href="#contact">Заказать лендинг</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
-      <div class="container">
-        <p class="eyebrow"><span class="dot"></span>Лендинги для бизнеса под ключ</p>
-        <div class="hero-type">
-          <span class="t-line"><span style="animation-delay:.05s">Сайты,</span></span>
-          <span class="t-line"><span style="animation-delay:.15s">которые</span></span>
-          <span class="t-line t-line--2"><span style="animation-delay:.25s">приводят клиентов</span></span>
-        </div>
-        <h1 class="hero-sr">Алексей — создание лендингов для бизнеса под ключ</h1>
-
-        <div class="hero-grid">
-          <div class="hero-text">
-            <p class="hero-lead">Меня зовут Алексей. Делаю современные одностраничные сайты для бизнеса: дизайн, адаптив под телефоны, форма заявки и размещение в интернете. От 4 000 ₽, срок от 3 дней.</p>
-            <div class="hero-sides">
-              <a class="btn btn--volt btn-magnet" href="#contact">Заказать лендинг <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
-              <a class="btn btn--ghost" href="#services">Посмотреть цены</a>
-            </div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <p class="hero-badge">Лендинги для бизнеса под ключ</p>
+          <h1>Сайты, которые приводят клиентов</h1>
+          <p class="hero-lead">Меня зовут Алексей. Делаю современные одностраничные сайты для бизнеса: дизайн, адаптив под телефоны, форма заявки и размещение в интернете. От 4 000 ₽, срок от 3 дней.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Заказать лендинг</a>
+            <a class="btn btn-ghost" href="#services">Посмотреть цены</a>
           </div>
-          <div class="hero-visual">
-            <dl class="hero-stats">
-              <div class="hero-stat"><dt data-count="4000">4 000</dt><dd>₽ стоимость под ключ</dd></div>
-              <div class="hero-stat"><dt>3–7</dt><dd>дней средний срок работы</dd></div>
-              <div class="hero-stat"><dt data-count="100">100</dt><dd>% адаптив под телефоны</dd></div>
-            </dl>
-            <div class="hero-panel">
-              <span class="hc-corner hc-tl"></span><span class="hc-corner hc-br"></span>
-              <div class="big">А</div>
-              <div class="lbl">личный бренд</div>
-              <div class="bar"></div>
+          <dl class="hero-stats">
+            <div>
+              <dt>от 4 000 ₽</dt>
+              <dd>стоимость под ключ</dd>
             </div>
-            <div class="corner-tags">
-              <span class="corner-tag c1">Дизайн</span>
-              <span class="corner-tag c2">Адаптив</span>
-              <span class="corner-tag c3">Быстро</span>
+            <div>
+              <dt>3–7 дней</dt>
+              <dd>средний срок работы</dd>
+            </div>
+            <div>
+              <dt>100%</dt>
+              <dd>адаптив под телефоны</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-scene" aria-hidden="true">
+          <div class="glow-orb"></div>
+          <div class="scene">
+            <div class="cube">
+              <div class="cube-face cube-face-1"></div>
+              <div class="cube-face cube-face-2"></div>
+              <div class="cube-face cube-face-3"></div>
+              <div class="cube-face cube-face-4"></div>
+              <div class="cube-face cube-face-5"></div>
+              <div class="cube-face cube-face-6"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
-<section class="section cube-section" id="cube">
-  <div class="container">
-    <div class="section__head">
-      <p class="eyebrow"><span class="dot"></span>05 / Пакеты</p>
-      <h2 class="h-xl">Цены на 3D-кубе</h2>
-      <p class="cube-hint">Покрутите куб мышкой или пальцем — на гранях тарифы</p>
-    </div>
-    <div class="cube-stage" id="cubeStage">
-      <div class="cube3d" id="theCube">
-        <div class="cface cf-front">
-          <span class="cf-num">/01</span>
-          <span class="cf-name">Лендинг Старт</span>
-          <span class="cf-price">4 000</span>
-          <span class="cf-cur">руб · под ключ</span>
-        </div>
-        <div class="cface cf-back">
-          <span class="cf-num">/03</span>
-          <span class="cf-name">Доработка сайта</span>
-          <span class="cf-price">2 000</span>
-          <span class="cf-cur">руб · работа</span>
-        </div>
-        <div class="cface cf-right">
-          <span class="cf-num">/02</span>
-          <span class="cf-name">Продающий лендинг</span>
-          <span class="cf-price">8 000</span>
-          <span class="cf-cur">руб · под ключ</span>
-        </div>
-        <div class="cface cf-left">
-          <span class="cf-big">FITFUUX</span>
-          <span class="cf-mid">лендинги под ключ</span>
-        </div>
-        <div class="cface cf-top">
-          <span class="cf-big">3D</span>
-          <span class="cf-mid">крути мышкой</span>
-        </div>
-        <div class="cface cf-bottom">
-          <span class="cf-big">©2026</span>
-          <span class="cf-mid">все тарифы</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  .cube-section{overflow:hidden}
-  .cube-hint{color:var(--muted);font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
-  .cube-stage{perspective:1100px;min-height:340px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab;position:relative;user-select:none}
-  .cube-stage:active{cursor:grabbing}
-  .cube3d{position:relative;width:250px;height:150px;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(24deg);transition:transform .5s var(--ease)}
-  .cube3d.no-anim{transition:none}
-  .cface{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(160deg,#1a1a1f,#101012);border:1px solid rgba(212,255,63,.35);box-shadow:0 0 30px rgba(212,255,63,.06) inset;backface-visibility:hidden;padding:14px;text-align:center}
-  .cf-front{transform:translateZ(75px)}
-  .cf-back{transform:rotateY(180deg) translateZ(75px)}
-  .cf-right{transform:rotateY(90deg) translateZ(75px)}
-  .cf-left{transform:rotateY(-90deg) translateZ(75px)}
-  .cf-top{transform:rotateX(90deg) translateZ(75px)}
-  .cf-bottom{transform:rotateX(-90deg) translateZ(75px)}
-  .cf-num{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;color:#b6ff2e}
-  .cf-name{font-family:var(--cond);font-size:1.1rem;font-weight:700;text-transform:uppercase;line-height:1.05}
-  .cf-price{font-family:var(--cond);font-size:2.2rem;font-weight:900;color:#b6ff2e;line-height:1}
-  .cf-cur{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-  .cf-big{font-family:var(--cond);font-size:1.6rem;font-weight:900;color:#b6ff2e;text-transform:uppercase;line-height:1}
-  .cf-mid{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-</style>
-
-<script>
-(function(){
-  var cube=document.getElementById("theCube");if(!cube)return;
-  var stage=document.getElementById("cubeStage");
-  var ry=24,rx=-14,auto=true,t=0;
-  var rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function apply(){cube.style.transform="rotateX("+rx+"deg) rotateY("+ry+"deg)"}
-  function pos(e){var r=stage.getBoundingClientRect();var cx=e.clientX||0,cy=e.clientY||0;return {x:cx-r.left-r.width/2,y:cy-r.top-r.height/2}}
-  var down=null;
-  stage.addEventListener("pointerdown",function(e){auto=false;cube.classList.add("no-anim");down=pos(e);stage.setPointerCapture(e.pointerId);e.preventDefault()});
-  stage.addEventListener("pointermove",function(e){if(!down)return;var p=pos(e);var dx=p.x-down.x,dy=p.y-down.y;ry+=dx*.5;rx+=(-dy)*.4;if(rx<-70)rx=-70;if(rx>50)rx=50;down=p;apply();t=0});
-  stage.addEventListener("pointerup",function(){down=null});
-  stage.addEventListener("pointercancel",function(){down=null});
-  function frame(now){if(!down && !rm && document.hidden===false){if(!t)t=now;var dt=now-t;t=now;ry+=(dt*.018);ry=((ry%360)+360)%360;apply()}requestAnimationFrame(frame)}
-  requestAnimationFrame(frame);
-  apply();
-})();
-</script>
-
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>Создаю сайты<b> →</b></span><span>Адаптив<b> →</b></span><span>Продающие тексты<b> →</b></span><span>Форма заявки<b> →</b></span><span>Публикация в интернете<b> →</b></span>
-        <span>Создаю сайты<b> →</b></span><span>Адаптив<b> →</b></span><span>Продающие тексты<b> →</b></span><span>Форма заявки<b> →</b></span><span>Публикация в интернете<b> →</b></span>
-      </div>
-    </div>
 
     <section class="section" id="about">
       <div class="container about-grid">
-        <div class="about-text reveal">
-          <p class="about-num">01 / Обо мне</p>
-          <h2 class="h-xl">Работаю просто —<br>на результат</h2>
+        <div class="about-photo" data-tilt aria-hidden="true"><span>А</span></div>
+        <div class="about-text">
+          <h2>Обо мне</h2>
           <p>Меня зовут Алексей, я создаю лендинги для бизнеса. Помогаю предпринимателям и небольшим компаниям получить сайт, который быстро загружается, хорошо выглядит на любом устройстве и превращает посетителей в заявки.</p>
-          <p>Обсуждаем задачу и цель сайта, я показываю первый вариант, вносим правки — и вы получаете готовый сайт, уже размещённый в интернете.</p>
-          <ol class="about-list">
-            <li class="reveal" data-delay="1"><span class="n">01</span><span class="t">Фиксированная цена до старта</span></li>
-            <li class="reveal" data-delay="2"><span class="n">02</span><span class="t">Адаптив — в любой тариф</span></li>
-            <li class="reveal" data-delay="3"><span class="n">03</span><span class="t">Помогу с публикацией</span></li>
-          </ol>
-        <div class="about-stats reveal" data-delay="2">
-          <div class="astat"><b><span data-count="40">0</span></b><span>лендингов сделано</span></div>
-          <div class="astat"><b><span data-count="15">0</span></b><span>довольных клиентов</span></div>
-          <div class="astat"><b><span data-count="3">0</span></b><span>года в вебе</span></div>
-        </div>
-        </div>
-        <div class="about-photo reveal" data-delay="1">
-          <span class="mono">А</span>
-          <span class="mono-over">А</span>
-          <span class="cap"><b>Алек<em>сей</em>.</b><span>Лендинг-дизайнер</span></span>
+          <p>Работаю просто: обсуждаем задачу и цель сайта, я показываю первый вариант, вносим правки — и вы получаете готовый сайт, уже размещённый в интернете.</p>
+          <ul class="about-list">
+            <li>Фиксированная цена до начала работы</li>
+            <li>Адаптив под телефоны — в любой тариф</li>
+            <li>Помогу с публикацией сайта в интернете</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="section" id="services" style="background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <section class="section section-alt" id="services">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal"><span class="dot"></span>02 / Услуги и цены</p>
-          <h2 class="h-xl reveal" data-delay="1">Прозрачные<br>пакеты</h2>
-          <p class="section-lead" style="color:var(--muted); max-width:560px;">Вы заранее знаете, что получите и сколько это стоит.</p>
-        </div>
+        <h2>Услуги и цены</h2>
+        <p class="section-lead">Прозрачные пакеты: вы заранее знаете, что получите и сколько это стоит.</p>
         <div class="cards">
-          <article class="card reveal tilt" data-delay="1">
-            <span class="card-glare"></span>
-            <span class="c-num">/01</span>
-            <h3>Лендинг<br>«Старт»</h3>
+          <article class="card" data-tilt>
+            <h3>Лендинг «Старт»</h3>
             <p>Одностраничный сайт-визитка: структура, современный дизайн, адаптив, форма заявки. Для быстрого присутствия бизнеса в интернете.</p>
-            <div class="card-price"><small>стоимость под ключ</small>от 4 000 ₽</div>
+            <p class="card-price">от 4 000 ₽</p>
           </article>
-          <article class="card reveal tilt" data-delay="2" style="background:var(--bg-2);">
-            <span class="card-glare"></span>
-            <span class="c-num">/02</span>
-            <h3>Продающий<br>лендинг</h3>
+          <article class="card" data-tilt>
+            <h3>Продающий лендинг</h3>
             <p>Полный цикл: структура под вашу аудиторию, продающие тексты, анимации, подключение приёма заявок.</p>
-            <div class="card-price"><small>стоимость под ключ</small>от 8 000 ₽</div>
+            <p class="card-price">от 8 000 ₽</p>
           </article>
-          <article class="card reveal tilt" data-delay="3">
-            <span class="card-glare"></span>
-            <span class="c-num">/03</span>
-            <h3>Доработка<br>сайта</h3>
+          <article class="card" data-tilt>
+            <h3>Доработка сайта</h3>
             <p>Улучшение существующего сайта: адаптив под мобильные, ускорение загрузки, редизайн отдельных блоков.</p>
-            <div class="card-price"><small>стоимость работы</small>от 2 000 ₽</div>
+            <p class="card-price">от 2 000 ₽</p>
           </article>
         </div>
       </div>
@@ -632,436 +139,124 @@
 
     <section class="section" id="portfolio">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal"><span class="dot"></span>03 / Портфолио</p>
-          <h2 class="h-xl reveal" data-delay="1">Шесть демо —<br>в разных сферах</h2>
-          <p class="section-lead" style="color:var(--muted); max-width:600px;">Откройте любой — и вы увидите, как может выглядеть сайт вашей компании: структура, тексты, дизайн и адаптив собраны с нуля.</p>
-        </div>
+        <h2>Портфолио</h2>
+        <p class="section-lead">Шесть демо-лендингов для разных сфер бизнеса. Откройте любой — и вы увидите, как может выглядеть сайт вашей компании: структура, тексты, дизайн и адаптив собраны с нуля.</p>
         <div class="pf-grid">
-          <a class="pf-card reveal tilt" href="florist.html" target="_blank" rel="noopener">
-            <span class="pf-thumb pf-thumb-florist"><span class="card-glare pf-glare"></span><span class="pf-mono">Б</span><span class="pf-tag">Цветы</span></span>
+          <a class="card pf-card" href="florist.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-florist"><span class="pf-mono" aria-hidden="true">Б</span><span class="pf-tag">Цветы</span></span>
             <span class="pf-body">
               <h3>Магазин цветов «Букет»</h3>
               <p>Витрина букетов, доставка за час, оформление праздников.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
-          <a class="pf-card reveal tilt" href="barbershop.html" target="_blank" rel="noopener" data-delay="1">
-            <span class="pf-thumb pf-thumb-barber"><span class="card-glare pf-glare"></span><span class="pf-mono">Б</span><span class="pf-tag">Барбершоп</span></span>
+          <a class="card pf-card" href="barbershop.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-barber"><span class="pf-mono" aria-hidden="true">Б</span><span class="pf-tag">Барбершоп</span></span>
             <span class="pf-body">
               <h3>Барбершоп «Бритва»</h3>
               <p>Тёмный дизайн, услуги и цены, запись к барберу онлайн.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
-          <a class="pf-card reveal tilt" href="fitness.html" target="_blank" rel="noopener" data-delay="2">
-            <span class="pf-thumb pf-thumb-fitness"><span class="card-glare pf-glare"></span><span class="pf-mono">А</span><span class="pf-tag">Фитнес</span></span>
+          <a class="card pf-card" href="fitness.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-fitness"><span class="pf-mono" aria-hidden="true">А</span><span class="pf-tag">Фитнес</span></span>
             <span class="pf-body">
               <h3>Фитнес-клуб «Атлант»</h3>
               <p>Абонементы, направления тренировок, пробное занятие.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
-          <a class="pf-card reveal tilt" href="coffee.html" target="_blank" rel="noopener">
-            <span class="pf-thumb pf-thumb-coffee"><span class="card-glare pf-glare"></span><span class="pf-mono">З</span><span class="pf-tag">Кофейня</span></span>
+          <a class="card pf-card" href="coffee.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-coffee"><span class="pf-mono" aria-hidden="true">З</span><span class="pf-tag">Кофейня</span></span>
             <span class="pf-body">
               <h3>Кофейня «Зерно»</h3>
               <p>Меню и цены, атмосфера заведения, путь до точки на карте.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
-          <a class="pf-card reveal tilt" href="autoservice.html" target="_blank" rel="noopener" data-delay="1">
-            <span class="pf-thumb pf-thumb-auto"><span class="card-glare pf-glare"></span><span class="pf-mono">М</span><span class="pf-tag">Автосервис</span></span>
+          <a class="card pf-card" href="autoservice.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-auto"><span class="pf-mono" aria-hidden="true">М</span><span class="pf-tag">Автосервис</span></span>
             <span class="pf-body">
               <h3>Автосервис «Мотор»</h3>
               <p>Услуги с гарантией, честный прайс, запись на диагностику.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
-          <a class="pf-card reveal tilt" href="dentist.html" target="_blank" rel="noopener" data-delay="2">
-            <span class="pf-thumb pf-thumb-dent"><span class="card-glare pf-glare"></span><span class="pf-mono">Д</span><span class="pf-tag">Стоматология</span></span>
+          <a class="card pf-card" href="dentist.html" target="_blank" rel="noopener">
+            <span class="pf-thumb pf-thumb-dent"><span class="pf-mono" aria-hidden="true">Д</span><span class="pf-tag">Стоматология</span></span>
             <span class="pf-body">
               <h3>Стоматология «Дента»</h3>
               <p>Услуги клиники, прозрачные цены, запись на приём.</p>
-              <span class="pf-link">Открыть демо <span class="arr">→</span></span>
+              <span class="pf-link">Открыть демо</span>
             </span>
           </a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact" style="background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <section class="section section-alt" id="contact">
       <div class="container contact-grid">
-        <div class="contact-info reveal">
-          <p class="eyebrow"><span class="dot"></span>04 / Контакты</p>
-          <h2 class="h-xl">Обсудим<br>ваш проект?</h2>
+        <div class="contact-info">
+          <h2>Обсудим ваш проект?</h2>
           <p>Напишите пару слов о вашем бизнесе — отвечу в течение дня, назову точную стоимость и срок.</p>
           <ul class="contact-list">
-            <li class="contact-item">
-              <span class="contact-ico">✈</span>
-              <span class="k">Telegram</span>
+            <li>
+              <span class="contact-label">Telegram</span>
               <a href="https://t.me/Fitfuux">@Fitfuux</a>
             </li>
-            <li class="contact-item">
-              <span class="contact-ico">✆</span>
-              <span class="k">Телефон</span>
+            <li>
+              <span class="contact-label">Телефон</span>
               <a href="tel:+79952585787">+7 995 258-57-87</a>
             </li>
           </ul>
           <div class="pay-block">
             <h3>Оплата через СБП</h3>
-            <p>Работаю по схеме 50/50: половина — предоплата, остаток после того, как вы посмотрите готовый сайт. Перевод по номеру телефона в любом банке.</p>
+            <p>Работаю по схеме 50/50: половина суммы — предоплата, остаток после того, как вы посмотрите готовый сайт. Перевод по номеру телефона в приложении любого банка.</p>
             <div class="pay-row">
               <div>
-                <span class="pay-number">+7 995 258-57-87</span>
+                <span class="contact-label">Номер для перевода</span>
+                <strong class="pay-number">+7 995 258-57-87</strong>
                 <span class="pay-bank">СБП · Т-Банк · получатель Алексей</span>
               </div>
-              <button class="btn btn--ghost btn--sm" type="button" data-copy="+79952585787">Скопировать номер</button>
+              <button class="btn btn-ghost btn-small" type="button" data-copy="+79952585787">Скопировать номер</button>
             </div>
-            <p class="pay-note">Подходит Сбер, Т-Банк, ВТБ и любой другой банк с СБП. Чек о предоплате — подтверждение брони срока.</p>
+            <p class="pay-note">Подходит Сбер, Т-Банк, ВТБ и любой другой банк с СБП. Чек о предоплате — подтверждение брони срока под ваш проект.</p>
             <p class="pay-status" aria-live="polite"></p>
           </div>
         </div>
-        <form class="contact-form reveal" data-delay="1">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="gotcha-hp" aria-label="Не заполняйте это поле" aria-hidden="true">
-          <label><span>Ваше имя</span><input type="text" name="name" required placeholder="Как к вам обращаться"></label>
-          <label><span>Телефон или Telegram</span><input type="text" name="contact" required placeholder="Куда вам ответить"></label>
-          <label><span>Расскажите о задаче</span><textarea name="message" rows="4" placeholder="Чем занимается бизнес и какой сайт нужен"></textarea></label>
-          <button class="btn btn--volt btn-magnet" type="submit">Отправить заявку <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></button>
+        <form class="card contact-form">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="gotcha-hp">
+          <label>
+            <span>Ваше имя</span>
+            <input type="text" name="name" required placeholder="Как к вам обращаться">
+          </label>
+          <label>
+            <span>Телефон или Telegram</span>
+            <input type="text" name="contact" required placeholder="Куда вам ответить">
+          </label>
+          <label>
+            <span>Расскажите о задаче</span>
+            <textarea name="message" rows="4" placeholder="Чем занимается бизнес и какой сайт нужен"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
           <p class="form-status" aria-live="polite"></p>
         </form>
       </div>
     </section>
   </main>
 
-  <div class="ticker ticker--volt" aria-hidden="true">
-    <div class="ticker__track">
-      <span>Быстро<b> →</b></span><span>Приводит клиентов<b> →</b></span><span>Адаптив<b> →</b></span><span>Под ключ<b> →</b></span><span>Fitfuux<b> →</b></span>
-      <span>Быстро<b> →</b></span><span>Приводит клиентов<b> →</b></span><span>Адаптив<b> →</b></span><span>Под ключ<b> →</b></span><span>Fitfuux<b> →</b></span>
-    </div>
-  </div>
-
   <footer class="site-footer">
-    <div class="ftr-cta">
-      <p class="eyebrow">Есть идея?</p>
-      <a class="big" href="https://t.me/Fitfuux" target="_blank" rel="noopener">
-        <span>Пиши мне</span>
-        <span class="big-sub">@Fitfuux <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></span>
-      </a>
-    </div>
     <div class="container footer-inner">
-      <p>© <span class="footer-year">2026</span> Fitfuux — лендинги под ключ</p>
+      <p>© <span class="footer-year">2026</span> Алексей — создание лендингов</p>
       <nav class="footer-nav">
         <a href="#about">Обо мне</a>
-        <a href="#services">Услуги</a>
+        <a href="#services">Услуги и цены</a>
         <a href="#portfolio">Портфолио</a>
         <a href="#contact">Контакты</a>
       </nav>
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      // Burger
-      var burger = document.querySelector(".burger");
-      var nav = document.querySelector(".site-nav");
-      burger.addEventListener("click", function () {
-        var open = nav.classList.toggle("is-open");
-        burger.classList.toggle("is-open", open);
-        burger.setAttribute("aria-expanded", String(open));
-      });
-      nav.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-          nav.classList.remove("is-open");
-          burger.classList.remove("is-open");
-          burger.setAttribute("aria-expanded", "false");
-        });
-      });
-
-      // Reveal
-      var revealEls = document.querySelectorAll(".reveal");
-      function revealAll() { revealEls.forEach(function (el) { el.classList.add("in"); }); }
-      if ("IntersectionObserver" in window && !reduceMotion) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.15 });
-        revealEls.forEach(function (el) { io.observe(el); });
-      } else { revealAll(); }
-
-      // Счётчики
-      var counters = document.querySelectorAll("[data-count]");
-      function animateCount(el) {
-        var target = parseInt(el.getAttribute("data-count"), 10);
-        var dur = 1300, start = performance.now();
-        function tick(now) {
-          var p = Math.min((now - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased).toLocaleString("ru-RU");
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-      if ("IntersectionObserver" in window && !reduceMotion) {
-        var cio = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (en.isIntersecting) { animateCount(en.target); cio.unobserve(en.target); } });
-        }, { threshold: 0.5 });
-        counters.forEach(function (c) { cio.observe(c); });
-      }
-
-      // Форма
-      var FORM_ENDPOINT = "https://formspree.io/f/moeeqzze";
-      var form = document.querySelector(".contact-form");
-      var statusLine = form.querySelector(".form-status");
-      form.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        var button = form.querySelector("button[type=submit]");
-        button.disabled = true;
-        statusLine.classList.remove("is-success", "is-error");
-        statusLine.textContent = "";
-        try {
-          if (FORM_ENDPOINT) {
-            await fetch(FORM_ENDPOINT, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-          } else {
-            await new Promise(function (r) { setTimeout(r, 600); });
-          }
-          statusLine.textContent = "Спасибо! Заявка отправлена, я свяжусь с вами в ближайшее время.";
-          statusLine.classList.add("is-success");
-          form.reset();
-        } catch (e) {
-          statusLine.textContent = "Не удалось отправить. Попробуйте ещё раз или напишите напрямую в Telegram.";
-          statusLine.classList.add("is-error");
-        } finally {
-          button.disabled = false;
-        }
-      });
-
-      // Год
-      document.querySelector(".footer-year").textContent = new Date().getFullYear();
-
-      // Копирование
-      var copyBtn = document.querySelector("[data-copy]");
-      var payStatus = document.querySelector(".pay-status");
-      if (copyBtn && payStatus) {
-        copyBtn.addEventListener("click", async function () {
-          var value = copyBtn.getAttribute("data-copy");
-          try { await navigator.clipboard.writeText(value); }
-          catch (e) {
-            var tmp = document.createElement("textarea");
-            tmp.value = value; tmp.setAttribute("readonly", "");
-            tmp.style.position = "absolute"; tmp.style.left = "-9999px";
-            document.body.appendChild(tmp); tmp.select(); document.execCommand("copy"); tmp.remove();
-          }
-          payStatus.textContent = "Номер скопирован — вставьте его в приложении банка.";
-          setTimeout(function () { payStatus.textContent = ""; }, 4000);
-        });
-      }
-    })();
-  </script>
-
-<script>
-(function () {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var canHover = window.matchMedia("(hover: hover)").matches;
-
-  /* 1. Линия прогресса чтения */
-  var rp = document.getElementById("readProgress");
-  if (rp) {
-    function prog() { var h = document.documentElement.scrollHeight - innerHeight; rp.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + "%"; }
-    addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
-  }
-
-  /* 2. Курсор-акцент + параллакс-свечение + магнит (только мышь) */
-  if (canHover && !reduce) {
-    var dot = document.getElementById("cursorDot");
-    var glow = document.querySelector(".glow-field");
-    var mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my, glowX = 20, glowY = 10, gtx = 20, gty = 10;
-    function loop() {
-      mx += (tx - mx) * 0.18; my += (ty - my) * 0.18;
-      if (dot) dot.style.transform = "translate(" + mx + "px," + my + "px)";
-      glowX += (gtx - glowX) * 0.05; glowY += (gty - glowY) * 0.05;
-      if (glow) { glow.style.setProperty("--gx", glowX + "%"); glow.style.setProperty("--gy", glowY + "%"); }
-      requestAnimationFrame(loop);
-    }
-    addEventListener("pointermove", function (e) {
-      tx = e.clientX; ty = e.clientY;
-      gtx = (e.clientX / innerWidth) * 100; gty = (e.clientY / innerHeight) * 100;
-      if (dot) dot.classList.add("on");
-    });
-    addEventListener("pointerdown", function (e) { if (dot) dot.classList.add("grow"); });
-    addEventListener("pointerup", function (e) { if (dot) dot.classList.remove("grow"); });
-    loop();
-
-    document.querySelectorAll(".btn-magnet").forEach(function (btn) {
-      btn.addEventListener("pointermove", function (e) {
-        var r = btn.getBoundingClientRect();
-        btn.style.setProperty("--mx", ((e.clientX - (r.left + r.width / 2)) * 0.18) + "px");
-        btn.style.setProperty("--my", ((e.clientY - (r.top + r.height / 2)) * 0.28) + "px");
-      });
-      btn.addEventListener("pointerleave", function () { btn.style.setProperty("--mx", "0px"); btn.style.setProperty("--my", "0px"); });
-    });
-
-    document.querySelectorAll(".card-glare").forEach(function (card) {
-      card.addEventListener("pointermove", function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty("--gxp", (e.clientX - r.left) + "px");
-        card.style.setProperty("--gyp", (e.clientY - r.top) + "px");
-      });
-    });
-  } else {
-    var dot = document.getElementById("cursorDot"); if (dot) dot.style.display = "none";
-  }
-
-  /* 3. 3D-наклон карточек */
-  if (canHover && !reduce) {
-    var tiltCards = document.querySelectorAll(".tilt");
-    tiltCards.forEach(function (card) {
-      card.addEventListener("pointermove", function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - 0.5;
-        var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = "perspective(800px) rotateX(" + (-py * 8).toFixed(2) + "deg) rotateY(" + (px * 10).toFixed(2) + "deg) translateY(-3px)";
-      });
-      card.addEventListener("pointerleave", function () { card.style.transform = ""; });
-    });
-  }
-
-  /* 4. Раздельное появление заголовков */
-  document.querySelectorAll(".h-xl").forEach(function (h) {
-    if (h.dataset.split) return; h.dataset.split = "1";
-    var raw = h.innerHTML;
-    var lines = raw.split("<br>");
-    var parts = lines.map(function (ln) { return '<span class="split-line"><span>' + ln + "</span></span>"; });
-    h.classList.add("split-h", "reveal"); h.innerHTML = parts.join("");
-  });
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { threshold: 0.3 });
-    document.querySelectorAll(".split-h").forEach(function (h) { io.observe(h); });
-  }
-
-  /* 4. Счётчики */
-  document.querySelectorAll("[data-count]").forEach(function (el) {
-    if (el.dataset.done) return; el.dataset.done = "1";
-    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
-    var dur = 1300, start = null;
-    function tick(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1); var e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(target * e).toLocaleString("ru-RU"); if (p < 1) requestAnimationFrame(tick); }
-    requestAnimationFrame(tick);
-  });
-
-  /* 5. Плавный скролл по якорям */
-  if (!reduce) {
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.addEventListener("click", function (e) {
-        var id = a.getAttribute("href"); if (!id || id.length < 2) return;
-        var t = document.querySelector(id); if (!t) return;
-        e.preventDefault();
-        smoothScroll(t.getBoundingClientRect().top + scrollY - 70);
-      });
-    });
-    var ani;
-    function smoothScroll(to) {
-      cancelAnimationFrame(ani);
-      var start = scrollY, dur = 700, t0 = null;
-      function step(ts) { if (!t0) t0 = ts; var p = Math.min((ts - t0) / dur, 1); var k = 1 - Math.pow(1 - p, 3); scrollTo(0, start + (to - start) * k); if (p < 1) ani = requestAnimationFrame(step); }
-      ani = requestAnimationFrame(step);
-    }
-  }
-})();
-</script>
-
-<script>
-(function () {
-  var ld = document.getElementById("loader");
-  var pctEl = document.getElementById("loaderPct");
-  var barEl = document.getElementById("loaderBar");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.body.classList.add("loading");
-  if (!ld) { document.body.classList.remove("loading"); return; }
-  var p = 0, target = 0;
-  function render() {
-    if (pctEl) pctEl.textContent = Math.round(p);
-    if (barEl) barEl.style.width = p + "%";
-  }
-  function loadProgress() {
-    // приблизительно: 40% сразу после парсинга, дальше по мере готовности
-    var base = 40;
-    if (document.readyState === "interactive") base = 55;
-    if (document.readyState === "complete") base = 90;
-    target = base;
-  }
-  document.addEventListener("readystatechange", loadProgress);
-  window.addEventListener("load", function () { target = 100; });
-  loadProgress();
-  var rAF = requestAnimationFrame;
-  if (reduce) { target = 100; }
-  function tick() {
-    if (p < target) { p = Math.min(target, p + Math.max(1, (target - p) * 0.25)); render(); }
-    if (p >= 100 && pctEl && pctEl.textContent === "100") {
-      setTimeout(function () { ld.classList.add("done"); document.body.classList.remove("loading"); }, 350);
-      return;
-    }
-    rAF(tick);
-  }
-  // гарантия: если load долго не приходит
-  setTimeout(function () { if (p < 100) { target = 100; } }, 3000);
-  tick();
-})();
-</script>
-
-<script>
-(function () {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function splitHero() {
-    var type = document.querySelector(".hero-type");
-    if (!type || type.dataset.letters) return; type.dataset.letters = "1";
-    type.querySelectorAll(".t-line > span").forEach(function (wordSpan) {
-      var text = wordSpan.textContent;
-      if (reduce) return;
-      var base = parseFloat(wordSpan.style.animationDelay) || 0;
-      var words = text.split(" ");
-      var html = "";
-      var idx = 0;
-      words.forEach(function (w, wi) {
-        if (wi > 0) html += " ";
-        html += '<b class="w" style="animation-delay:' + (0.4 + base + idx * 0.05).toFixed(2) + 's">';
-        for (var i = 0; i < w.length; i++) {
-          html += '<b style="animation-delay:' + (0.4 + base + idx * 0.05).toFixed(2) + 's">' + w[i] + "</b>";
-          idx++;
-        }
-        html += "</b>";
-        idx++;
-      });
-      wordSpan.innerHTML = html;
-    });
-  }
-  splitHero();
-})();
-</script>
-
-<script>
-(function () {
-  var hero = document.getElementById("heroParticles");
-  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var n = 24;
-  for (var i = 0; i < n; i++) {
-    var p = document.createElement("span");
-    p.className = "pt";
-    var size = (Math.random() * 3 + 1).toFixed(1);
-    var vh = (window.innerHeight || 800);
-    p.style.width = size + "px"; p.style.height = size + "px";
-    p.style.left = (Math.random() * 100).toFixed(1) + "%";
-    p.style.setProperty("--vh", vh + "px");
-    p.style.setProperty("--ptdx", ((Math.random() * 120) - 60).toFixed(0) + "px");
-    p.style.animationDuration = (Math.random() * 6 + 5).toFixed(1) + "s";
-    p.style.animationDelay = (Math.random() * 9).toFixed(1) + "s";
-    hero.appendChild(p);
-  }
-})();
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
