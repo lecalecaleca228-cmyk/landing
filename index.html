@@ -116,6 +116,7 @@
     .hero-type .t-line { display:block; overflow:hidden; }
     .hero-type .t-line > span { display:inline-block; animation:rise 1s var(--ease) both; }
     .hero-type .t-line > span b { display:inline-block; opacity:0; transform:translateY(110%); animation:charRise .7s var(--ease) forwards; }
+    .hero-type .t-line > span b.w { white-space:nowrap; }
     @keyframes charRise { to { opacity:1; transform:none; } }
     .hero-type .t-line--2 { color:transparent; -webkit-text-stroke:1.5px var(--acid); margin-bottom:30px; }
     @keyframes rise { from { transform:translateY(110%); opacity:0 } to { transform:none; opacity:1 } }
@@ -1021,13 +1022,20 @@
     type.querySelectorAll(".t-line > span").forEach(function (wordSpan) {
       var text = wordSpan.textContent;
       if (reduce) return;
-      var html = "";
       var base = parseFloat(wordSpan.style.animationDelay) || 0;
-      for (var i = 0; i < text.length; i++) {
-        var ch = text[i];
-        if (ch === " ") { html += " "; continue; }
-        html += '<b style="animation-delay:' + (0.4 + base + i * 0.05).toFixed(2) + 's">' + ch + "</b>";
-      }
+      var words = text.split(" ");
+      var html = "";
+      var idx = 0;
+      words.forEach(function (w, wi) {
+        if (wi > 0) html += " ";
+        html += '<b class="w" style="animation-delay:' + (0.4 + base + idx * 0.05).toFixed(2) + 's">';
+        for (var i = 0; i < w.length; i++) {
+          html += '<b style="animation-delay:' + (0.4 + base + idx * 0.05).toFixed(2) + 's">' + w[i] + "</b>";
+          idx++;
+        }
+        html += "</b>";
+        idx++;
+      });
       wordSpan.innerHTML = html;
     });
   }
