@@ -52,6 +52,32 @@ form.addEventListener("submit", async (event) => {
 
 document.querySelector(".footer-year").textContent = new Date().getFullYear();
 
+const copyBtn = document.querySelector("[data-copy]");
+const payStatus = document.querySelector(".pay-status");
+
+if (copyBtn && payStatus) {
+  copyBtn.addEventListener("click", async () => {
+    const value = copyBtn.getAttribute("data-copy");
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const tmp = document.createElement("textarea");
+      tmp.value = value;
+      tmp.setAttribute("readonly", "");
+      tmp.style.position = "absolute";
+      tmp.style.left = "-9999px";
+      document.body.appendChild(tmp);
+      tmp.select();
+      document.execCommand("copy");
+      tmp.remove();
+    }
+    payStatus.textContent = "Номер скопирован — вставьте его в приложении банка.";
+    setTimeout(() => {
+      payStatus.textContent = "";
+    }, 4000);
+  });
+}
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const canHover = window.matchMedia("(hover: hover)").matches;
 

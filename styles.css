@@ -451,6 +451,139 @@ h2 {
   color: transparent;
 }
 
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pf-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.pf-thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+}
+
+.pf-mono {
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+.pf-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(4, 10, 22, 0.45);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+}
+
+.pf-body {
+  display: grid;
+  gap: 8px;
+  padding: 20px 22px 24px;
+}
+
+.pf-body h3 {
+  font-size: 1.15rem;
+}
+
+.pf-body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.pf-link {
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pf-card:hover .pf-link {
+  text-decoration: underline;
+}
+
+.pf-thumb-florist { background: linear-gradient(135deg, #d6488c, #3a9e63); }
+.pf-thumb-barber { background: linear-gradient(135deg, #3d3427, #e8a33d); }
+.pf-thumb-fitness { background: linear-gradient(135deg, #ff5a3c, #ffb03c); }
+.pf-thumb-coffee { background: linear-gradient(135deg, #5c3a1e, #b07b46); }
+.pf-thumb-auto { background: linear-gradient(135deg, #1e3a8a, #2563eb); }
+.pf-thumb-dent { background: linear-gradient(135deg, #0f766e, #22d3ee); }
+
+.pay-block {
+  margin-top: 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.pay-block h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.pay-block > p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 18px;
+}
+
+.pay-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border: 1px dashed rgba(110, 160, 255, 0.45);
+  border-radius: 12px;
+  background: rgba(47, 125, 246, 0.06);
+}
+
+.pay-number {
+  display: block;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.pay-bank {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.pay-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 12px;
+}
+
+.pay-status {
+  min-height: 1.2em;
+  color: var(--accent-2);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -627,7 +760,8 @@ h2 {
     max-width: 260px;
   }
 
-  .cards {
+  .cards,
+  .pf-grid {
     grid-template-columns: 1fr;
   }
 
