@@ -82,9 +82,14 @@
     /* Хедер */
     .site-header { position:sticky; top:0; z-index:50; background:rgba(10,10,11,.82); backdrop-filter:blur(16px); border-bottom:1px solid var(--line-soft); }
     .hdr-inner { display:flex; align-items:center; justify-content:space-between; min-height:74px; gap:24px; }
-    .logo { font-family:var(--cond); font-size:1.9rem; font-weight:800; color:var(--text); text-decoration:none; letter-spacing:.02em; line-height:1; }
-    .logo b { color:var(--acid); font-weight:900; }
-    .logo small { font-family:var(--mono); font-size:.6rem; color:var(--muted); letter-spacing:.2em; display:block; margin-top:2px; }
+    .logo { display:inline-flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); line-height:1; }
+    .logo .fit {
+      font-family:var(--cond); font-weight:900; text-transform:uppercase;
+      font-size:2rem; letter-spacing:.02em; color:var(--text); transition:letter-spacing .3s var(--ease);
+    }
+    .logo .fit .x { color:var(--acid); }
+    .logo:hover .fit { letter-spacing:.06em; }
+    .logo .tag { font-family:var(--mono); font-size:.62rem; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; border-left:2px solid var(--acid); padding-left:10px; line-height:1.35; }
     .site-nav { display:flex; align-items:center; gap:32px; }
     .site-nav > a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:500; position:relative; padding:6px 0; transition:color .2s ease; }
     .site-nav > a:hover { color:var(--text); }
@@ -321,7 +326,10 @@
 
   <header class="site-header">
     <div class="container hdr-inner">
-      <a class="logo" href="#top">Алексей<b>.</b><small>Лендинги под ключ</small></a>
+      <a class="logo" href="#top">
+        <span class="fit">Fitf<span class="x">uux</span>.</span>
+        <span class="tag">Лендинги<br>под ключ</span>
+      </a>
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false">
         <i></i><i></i>
       </button>
@@ -545,7 +553,7 @@
       </a>
     </div>
     <div class="container footer-inner">
-      <p>© <span class="footer-year">2026</span> Алексей — создание лендингов</p>
+      <p>© <span class="footer-year">2026</span> Fitfuux — лендинги под ключ</p>
       <nav class="footer-nav">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
