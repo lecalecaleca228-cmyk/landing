@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Автосервис «Мотор» — демо-лендинг</title>
+<meta name="description" content="Демо-лендинг автосервиса: диагностика, ремонт ходовой и двигателя, ТО с гарантией. Сайт сделан Алексеем.">
+<style>
+:root{--acc:#2563eb;--acc-soft:rgba(37,99,235,.08);--bg:#f5f7fa;--card:#fff;--text:#131a24;--muted:#66707f;--border:#dbe2ec}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.ribbon{background:#131a24;color:#fff;text-align:center;padding:10px 16px;font-size:.85rem}
+.ribbon a{color:#8fb3ff;font-weight:700;text-decoration:none}
+.ribbon a:hover{text-decoration:underline}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px;flex-wrap:wrap}
+.brand{font-size:1.35rem;font-weight:800;color:var(--text);text-decoration:none;text-transform:uppercase;letter-spacing:.05em}
+.brand b{color:var(--acc)}
+.hd-nav{display:flex;gap:22px}
+.hd-nav a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.hd-nav a:hover{color:var(--text)}
+.btn{display:inline-block;padding:13px 26px;border-radius:12px;font-weight:700;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+.btn-acc{background:var(--acc);color:#fff;box-shadow:0 10px 26px rgba(37,99,235,.3)}
+.btn-acc:hover{transform:translateY(-2px)}
+.btn-line{border:1.5px solid var(--border);color:var(--text)}
+.btn-line:hover{border-color:var(--acc)}
+.btn-sm{padding:9px 18px;font-size:.9rem}
+.hero{padding:64px 0 56px;background:linear-gradient(180deg,var(--acc-soft),transparent)}
+.badge{display:inline-block;background:var(--acc-soft);color:var(--acc);font-weight:700;font-size:.85rem;padding:6px 14px;border-radius:999px;margin-bottom:18px}
+.hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin-bottom:16px}
+.hero p{color:var(--muted);max-width:560px;font-size:1.08rem;margin-bottom:28px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:36px;flex-wrap:wrap;margin-top:40px}
+.stats b{font-size:1.5rem;color:var(--acc)}
+.stats span{display:block;color:var(--muted);font-size:.85rem}
+.sec{padding:56px 0}
+.sec h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:10px}
+.sec-lead{color:var(--muted);margin-bottom:32px;max-width:560px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.tcard h3{margin-bottom:8px;font-size:1.1rem}
+.tcard p{color:var(--muted);font-size:.95rem}
+.prices{display:grid;gap:14px;max-width:640px}
+.price-row{display:flex;justify-content:space-between;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px}
+.price-row b{color:var(--acc);white-space:nowrap}
+.contact{background:#131a24;color:#fff;padding:56px 0;text-align:center}
+.contact h2{margin-bottom:10px}
+.contact p{color:#aeb8c6;max-width:520px;margin:0 auto 24px}
+.contact .btn{margin:4px 6px 0}
+.contact .btn-line{color:#fff;border-color:#3a4656}
+.ftr{text-align:center;color:var(--muted);font-size:.85rem;padding:24px 0}
+.ftr a{color:var(--acc);font-weight:600;text-decoration:none}
+@media(max-width:760px){.hd-nav{display:none}.grid3{grid-template-columns:1fr}.stats{gap:22px}}
+</style>
+</head>
+<body>
+<div class="ribbon">Это демо-сайт: макет для автосервиса. Сделал <a href="https://lecalecaleca228-cmyk.github.io/landing/#contact">Алексей — заказать такой же</a></div>
+<header class="wrap hd">
+<a class="brand" href="#">Мотор<b>.</b></a>
+<nav class="hd-nav"><a href="#services">Услуги</a><a href="#prices">Цены</a><a href="#contact">Запись</a></nav>
+<a class="btn btn-acc btn-sm" href="#contact">Записаться на диагностику</a>
+</header>
+<main>
+<section class="hero"><div class="wrap">
+<p class="badge">Гарантия на работы — 6 месяцев</p>
+<h1>Починим так, что вы к нам вернётесь. Но не скоро</h1>
+<p>Сервис для иномарок: честная диагностика, понятная смета до начала работ и ремонт в срок. Показываем старые запчасти и объясняем каждое действие.</p>
+<div class="hero-actions"><a class="btn btn-acc" href="#contact">Записаться на диагностику</a><a class="btn btn-line" href="#prices">Прайс на работы</a></div>
+<div class="stats"><div><b>6 мес</b><span>гарантия на работы</span></div><div><b>до 1 дня</b><span>большинство ремонтов</span></div><div><b>0 ₽</b><span>осмотр и смета</span></div></div>
+</div></section>
+<section class="sec" id="services"><div class="wrap">
+<h2>Услуги</h2>
+<p class="sec-lead">От «послушайте, как стучит» до капитального ремонта.</p>
+<div class="grid3">
+<div class="tcard"><h3>Диагностика</h3><p>Компьютерная диагностика и осмотр ходовой. Найдём причину, а не лечим симптом — отчёт покажем на Tablet, по-человечески.</p></div>
+<div class="tcard"><h3>Ремонт ходовой и двигателя</h3><p>Подвеска, тормоза, двигатели и АКПП. Оригинал или проверенные аналоги — выбор всегда за вами, смета фиксируется.</p></div>
+<div class="tcard"><h3>ТО и расходники</h3><p>Замена масла, фильтров, свечей и ремней по регламенту вашего авто. Отметим в сервисной книжке без переплат оф дилера.</p></div>
+</div>
+</div></section>
+<section class="sec" id="prices"><div class="wrap">
+<h2>Цены</h2>
+<p class="sec-lead">Смета до начала работ. Если нашли больше — звоним и согласовываем, а не чиним молча.</p>
+<div class="prices">
+<div class="price-row"><span>Диагностика (осмотр + компьютер)</span><b>от 800 ₽</b></div>
+<div class="price-row"><span>Замена масла и фильтров</span><b>от 1 200 ₽</b></div>
+<div class="price-row"><span>Ремонт ходовой, работа</span><b>от 2 500 ₽</b></div>
+</div>
+</div></section>
+<section class="contact" id="contact"><div class="wrap">
+<h2>Запишитесь на осмотр</h2>
+<p>Опишите симптомы по телефону или просто приезжайте — посмотрим и назовём цену. Это демо-страница: здесь будет онлайн-запись вашего сервиса.</p>
+<a class="btn btn-acc" href="tel:+78000000000">+7 (800) 000-00-00</a>
+<a class="btn btn-line" href="https://t.me/Fitfuux">Написать автору сайта</a>
+</div></section>
+</main>
+<footer class="ftr wrap">Демо-лендинг создан Алексеем · лендинги для бизнеса под ключ · <a href="https://t.me/Fitfuux">@Fitfuux</a></footer>
+</body>
+</html>
