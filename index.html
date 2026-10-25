@@ -421,28 +421,6 @@
     /* Маска-градиент на тикере */
     .ticker { -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
 
-    /* Пиксельная манящая рука */
-    .hand-stage { display:flex; flex-direction:column; align-items:center; gap:24px; margin:30px 0 36px; }
-    .vox-stage { perspective:1000px; width:200px; height:200px; display:flex; align-items:center; justify-content:center; }
-    .vox-hand { position:relative; width:120px; height:120px; transform-style:preserve-3d; transform:rotateX(14deg) rotateY(-20deg); }
-    .vox-hand.swing { animation:swing3d 7s ease-in-out infinite; }
-    @keyframes swing3d { 0%,100% { transform:rotateX(14deg) rotateY(-20deg); } 50% { transform:rotateX(10deg) rotateY(8deg) translateY(-8px); } }
-    /* Реалистичная 3D-рука (SVG) */
-    .sv-hand { position:relative; width:180px; height:180px; transform-style:preserve-3d; }
-    .sv-hand .hand-svg { width:100%; height:100%; display:block; filter:drop-shadow(0 18px 30px rgba(0,0,0,.45)); }
-    .sv-hand.swing .hand-svg { transform-style:preserve-3d; animation:swingHand 6s ease-in-out infinite; }
-    @keyframes swingHand { 0%,100% { transform:rotateX(0) rotateY(0); } 50% { transform:rotateX(6deg) rotateY(-10deg) translateY(-6px); } }
-    .sv-hand .nudge { fill:url(#handGrad); stroke:rgba(212,255,63,.5); stroke-width:1.4; }
-    .sv-hand .dark { fill:url(#handDark); }
-    .sv-hand .shade { fill:url(#handShade); opacity:.85; }
-    .sv-hand .glint { fill:none; stroke:rgba(255,255,255,.7); stroke-width:1.2; stroke-linecap:round; }
-    .sv-hand .wave-finger { transform-origin:118px 74px; animation:waveFinger 1.6s ease-in-out infinite; }
-    .sv-hand.wave .wave-finger { animation:waveFinger 1.6s ease-in-out infinite; }
-    @keyframes waveFinger { 0%,100% { transform:rotate(0); } 50% { transform:rotate(-12deg); } }
-    .hand-cta { font-family:var(--mono); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-    .hand-actions { text-align:center; }
-    .hand-actions .reveals { text-align:center; }
-
     /* Отзывы */
     .reviews { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:16px; }
     .review { padding:30px; background:var(--bg-2); border:1px solid var(--line); border-radius:16px; position:relative; overflow:hidden; transition:border-color .3s, transform .3s var(--ease); }
@@ -933,55 +911,6 @@
     </div>
   </div>
 
-  <section class="section pixel-hand-wrap" id="hand">
-    <div class="container">
-      <p class="eyebrow reveal"><span class="dot"></span>Готовы начать?</p>
-      <h2 class="h-xl reveal" data-delay="1">Идём к цели</h2>
-      <div class="hand-stage reveal" data-delay="2" aria-hidden="true">
-        <div class="vox-stage" id="voxStage">
-          <div class="sv-hand" id="voxHand">
-            <svg class="hand-svg" viewBox="0 0 200 200" aria-hidden="true">
-              <defs>
-                <linearGradient id="handGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#f4ffcf"/><stop offset=".5" stop-color="#d4ff3f"/><stop offset="1" stop-color="#8fbf00"/>
-                </linearGradient>
-                <linearGradient id="handDark" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#646b39"/><stop offset="1" stop-color="#333a16"/>
-                </linearGradient>
-                <linearGradient id="handShade" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#d4ff3f" stop-opacity="0"/><stop offset=".6" stop-color="#3a4a00" stop-opacity=".5"/><stop offset="1" stop-color="#1b2400" stop-opacity=".7"/>
-                </linearGradient>
-              </defs>
-              <!-- ладонь с запястьем -->
-              <path class="nudge" d="M86 196 C86 196 80 176 82 150 L70 128 L64 96 C106 72 148 92 144 118 L148 140 L164 168 C160 170 156 172 153 174 L138 148 L118 132 C140 162 138 180 132 196 Z" />
-              <path class="dark" d="M104 190 L96 196 L132 196 L120 174 C110 150 112 130 122 118 L112 132 Z"/>
-              <!-- средний палец --><rect class="nudge" x="74" y="40" width="16" height="68" rx="7"/>
-              <rect class="dark" x="86" y="46" width="5" height="58" rx="2"/>
-              <!-- безымянный --><rect class="nudge" x="106" y="44" width="16" height="66" rx="7"/>
-              <rect class="dark" x="118" y="50" width="5" height="56" rx="2"/>
-              <!-- мизинец --><rect class="nudge" x="138" y="62" width="15" height="54" rx="7"/>
-              <!-- большой палец --><rect class="nudge" x="44" y="96" width="30" height="16" rx="8" transform="rotate(-14 59 104)"/>
-              <!-- манящий указательный палец (отдельная группа) -->
-              <g class="wave-finger">
-                <rect class="nudge" x="56" y="18" width="16" height="58" rx="7"/>
-                <rect class="dark" x="68" y="24" width="5" height="48" rx="2"/>
-                <path class="shade" d="M60 22 a8 8 0 0 1 8 -2 l10 0 a8 8 0 0 1 2 8 l-2 6 l-14 2 Z"/>
-                <path class="glint" d="M62 26 l8 -6"/>
-              </g>
-              <!-- мягкая тень-блик на ладони -->
-              <path class="shade" d="M70 128 L64 96 C80 78 112 76 134 90 L140 118 L132 104 C112 92 88 92 78 108 Z"/>
-              <path class="glint" d="M76 120 l16 -12"/>
-            </svg>
-          </div>
-        </div>
-        <div class="hand-cta">Идём сюда</div>
-      </div>
-      <div class="hand-actions reveals">
-        <a class="btn btn--volt btn-magnet" href="#contact">Обсудить проект <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
-      </div>
-    </div>
-  </section>
-
   <footer class="site-footer">
     <div class="ftr-cta">
       <p class="eyebrow">Есть идея?</p>
@@ -1358,26 +1287,6 @@
     });
   });
   render();
-})();
-</script>
-
-<script>
-(function () {
-  var wrap = document.getElementById("voxHand");
-  if (!wrap) return;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Рука — цельная 3D-фигура (ладонь + пальцы из граней). Три пальца «манят» через CSS.
-  function start() {
-    if (!reduce) wrap.classList.add("swing");
-  }
-  if ("IntersectionObserver" in window && !reduce) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { start(); io.unobserve(e.target); } });
-    }, { threshold: 0.35 });
-    io.observe(wrap);
-  } else {
-    start();
-  }
 })();
 </script>
 </body>
