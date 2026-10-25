@@ -335,17 +335,14 @@
     /* Блик, бегущий за курсором на карточках */
     .card-glare { position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:inherit; }
     .card-glare::before {
-      content:""; position:absolute; width:140px; height:140px; border-radius:50%;
-      background:radial-gradient(circle, rgba(212,255,63,.12), transparent 70%);
+      content:""; position:absolute; width:220px; height:220px; border-radius:50%;
+      background:radial-gradient(circle, rgba(212,255,63,.10), transparent 70%);
       transform:translate(var(--gxp,40%),var(--gyp,40%)); opacity:0; transition:opacity .3s ease;
     }
-    .card-glare::after {
-      content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; opacity:0; transition:opacity .35s ease;
-      background:radial-gradient(120px circle at var(--gxp,50%) var(--gyp,50%), var(--acid), transparent 65%);
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    }
-    .card-glare:hover::before, .card-glare:hover::after { opacity:1; }
+    .card-glare:hover::before { opacity:1; }
+    /* содержимое карточки — поверх блика, без просвечивания по краям шрифта */
+    .card-glare { z-index:0; }
+    .card > :not(.card-glare), .card-price, .card h3 { position:relative; z-index:1; }
 
     /* Блик на карточках портфолио + tilt */
     .tilt { transform-style:preserve-3d; transition:transform .18s ease; will-change:transform; }
@@ -613,17 +610,17 @@
 <style>
   .cube-section{overflow:hidden}
   .cube-hint{color:var(--muted);font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
-  .cube-stage{perspective:1100px;min-height:340px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab;position:relative;user-select:none}
+  .cube-stage{perspective:1000px;min-height:360px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab;position:relative;user-select:none;overflow:hidden}
   .cube-stage:active{cursor:grabbing}
-  .cube3d{position:relative;width:250px;height:150px;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(24deg);transition:transform .5s var(--ease)}
+  .cube3d{position:relative;width:220px;height:220px;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(24deg);transition:transform .5s var(--ease)}
   .cube3d.no-anim{transition:none}
   .cface{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(160deg,#1a1a1f,#101012);border:1px solid rgba(212,255,63,.35);box-shadow:0 0 30px rgba(212,255,63,.06) inset;backface-visibility:hidden;padding:14px;text-align:center}
-  .cf-front{transform:translateZ(75px)}
-  .cf-back{transform:rotateY(180deg) translateZ(75px)}
-  .cf-right{transform:rotateY(90deg) translateZ(75px)}
-  .cf-left{transform:rotateY(-90deg) translateZ(75px)}
-  .cf-top{transform:rotateX(90deg) translateZ(75px)}
-  .cf-bottom{transform:rotateX(-90deg) translateZ(75px)}
+  .cf-front{transform:translateZ(110px)}
+  .cf-back{transform:rotateY(180deg) translateZ(110px)}
+  .cf-right{transform:rotateY(90deg) translateZ(110px)}
+  .cf-left{transform:rotateY(-90deg) translateZ(110px)}
+  .cf-top{transform:rotateX(90deg) translateZ(110px)}
+  .cf-bottom{transform:rotateX(-90deg) translateZ(110px)}
   .cf-num{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;color:#b6ff2e}
   .cf-name{font-family:var(--cond);font-size:1.1rem;font-weight:700;text-transform:uppercase;line-height:1.05}
   .cf-price{font-family:var(--cond);font-size:2.2rem;font-weight:900;color:#b6ff2e;line-height:1}
